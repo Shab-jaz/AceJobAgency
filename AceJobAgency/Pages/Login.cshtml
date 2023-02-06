@@ -1,0 +1,110 @@
+﻿@page
+@model AceJobAgency.Pages.LoginModel
+@{
+}
+
+@using Microsoft.Extensions.Options
+@using Microsoft.Extensions.Configuration
+@inject IOptions<GoogleCaptchaConfig> GoogleCaptchaConfig
+
+@*<div class="container mt-5">
+
+	<div class="row justify-content-center align-items-center">
+
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<h1 class="mb-3">Login </h1>
+
+			<form method="post">
+				<div asp-validation-summary="All" class="text-danger"></div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Email">Email Address</label>
+					<input type="Text" asp-for="LModel.Email" class="form-control" />
+					<span asp-validaton-for="LModel.Email" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Password">Password</label>
+					<input type="Text" asp-for="LModel.Password" class="form-control" />
+					<span asp-validaton-for="LModel.Password" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3 form-check">
+					<input type="checkbox" asp-for="LModel.RememberMe" class="form-check-input" />
+					<label class="form-check-label" asp-for="LModel.RememberMe">Remember Me?</label>
+				</div>
+				<input asp-for="LModel.Token" id="LModel_Token" type="hidden" />
+
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+*@
+
+<!-- Section: Design Block -->
+<section class="text-center">
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+        background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">Login</h2>
+          <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+				<div class="mb-4">
+					<div class="form-outline">
+						<input type="email" id="form3Example3" class="form-control" asp-for="LModel.Email" />
+						<label class="form-label" for="form3Example3" asp-for="LModel.Email">Email address</label>
+					</div>
+					<span asp-validation-for="LModel.Email" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
+					<div class="form-outline">
+						<input type="text" id="form3Example1" class="form-control" asp-for="LModel.Password" />
+						<label class="form-label" for="form3Example1" asp-for="LModel.Password">Password</label>
+					</div>
+					<span asp-validation-for="LModel.Password" class="text-danger"></span>
+				</div>
+
+				<a class="mb-4" asp-page="/ForgotPassword">Forgot Password?</a>
+
+						<input asp-for="LModel.Token" id="LModel_Token" type="hidden" />
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              LOGIN
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->
+
+<script src="https://www.google.com/recaptcha/api.js?render=@GoogleCaptchaConfig.Value.SiteKey"></script>
+<script>
+
+	grecaptcha.ready(function () {
+		grecaptcha.execute('@GoogleCaptchaConfig.Value.SiteKey', { action: 'submit' }).then(function (token) {
+			console.log(token);
+			$('#LModel_Token').val(token);
+		});
+	});
+
+</script>

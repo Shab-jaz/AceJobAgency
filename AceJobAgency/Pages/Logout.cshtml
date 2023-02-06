@@ -1,0 +1,36 @@
+﻿@page
+@model AceJobAgency.Pages.LogoutModel
+@{
+}
+@*<form method="post">
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-sm-12 col-md-12 col-lg-4">
+				<p> Are you sure you want to logout? </p>
+				<p>
+					<button type="button" class="btn btn-outline-light" data-mdb-ripple-color="dark" asp-page-handler="Logout">Yes</button>
+					<button type="button" class="btn btn-light ml-5 border-dark" asp-page-handler="DontLogout">No</button>
+				</p>
+			</div>
+		</div>
+	</div>
+</form>
+*@
+
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+			<div class="card text-white" style="border-radius: 1rem;background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');">
+                    <div class="card-body p-5 text-center">
+						<form method="post">
+						<p> Are you sure you want to logout? </p>
+						<p>
+							<button class="btn btn-secondary" asp-page-handler="Logout">Yes</button>
+							<button class="btn btn-outline-light" data-mdb-ripple-color="dark" asp-page-handler="DontLogout">No</button>
+						</p>
+						</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

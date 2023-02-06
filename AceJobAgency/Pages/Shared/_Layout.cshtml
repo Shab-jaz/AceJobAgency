@@ -1,0 +1,109 @@
+﻿@using AceJobAgency.Model
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AceJobAgency</title>
+@*    <link rel="stylesheet" href="~/lib/bootstrap5/css/bootstrap.min.css"/>*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AceJobAgency.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">AceJobAgency</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    @{
+                        if (SignInManager.IsSignedIn(User))
+                        {
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                                </li>
+                            </ul>
+
+                            //<ul class="navbar-nav d-flex justify-content-end">
+                            //    <li class="nav-item">
+                            //        <a class="btn btn-primary" asp-area="" asp-page="/Logout">Logout</a>
+                            //    </li>
+                            //</ul>
+                             <ul class="navbar-nav d-flex justify-content-end">
+
+                                <!-- Right elements -->
+                                <div class="d-flex align-items-center">
+                                    <!-- Avatar -->
+                                    <div class="dropdown">
+                                       <a class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                       href="#"
+                                       id="navbarDropdownMenuAvatar"
+                                       role="button"
+                                       data-mdb-toggle="dropdown"
+                                       aria-expanded="false">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                             class="rounded-circle"
+                                             height="35"
+                                             loading="lazy" />
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="navbarDropdownMenuAvatar">
+                                            <li>
+                                                <a class="dropdown-item" asp-page="/Settings">Settings</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" asp-page="/Logout">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Right elements -->
+                             </ul>
+
+                        }
+                         else {
+                    <ul class="navbar-nav d-flex justify-content-end flex-grow-1">
+                        <li class="nav-item mx-3">
+                            <a class="btn btn-primary" asp-page="/Login">Login</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="btn btn-primary" asp-page="/Register">Register</a>
+                        </li>
+                    </ul>
+                    }
+                    }   
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - AceJobAgency - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
+@*    <script src="~/lib/bootstrap5/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
